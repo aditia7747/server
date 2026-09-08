@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>One Pride Roleplay | #Shakaa</title>
+    <title>One Pride Roleplay | 3D Dark Portal</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -70,6 +70,9 @@
             background-size: 32px 32px;
             overflow-x: hidden;
             letter-spacing: -0.01em;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         ::-webkit-scrollbar { width: 10px; }
@@ -136,9 +139,9 @@
     <nav class="sticky top-4 z-40 px-4">
         <div class="max-w-7xl mx-auto bg-oprp-surface/90 backdrop-blur-md border border-white/10 rounded-2xl shadow-3d-dark flex justify-between items-center p-3 md:px-5">
             <div class="flex items-center gap-3 group">
-                <!-- GANTI URL LOGO DI SINI -->
-                <div class="w-12 h-12 bg-oprp-orange border-2 border-black rounded-xl flex items-center justify-center overflow-hidden font-heading font-black text-white text-xl leading-none shadow-[2px_2px_0_#000] group-hover:scale-105 transition-transform">
-                    OP
+                <!-- LOGO SERVER TERINTEGRASI -->
+                <div class="w-12 h-12 bg-black border-2 border-black rounded-xl overflow-hidden shadow-[2px_2px_0_#000] group-hover:scale-105 transition-transform flex-shrink-0">
+                    <img src="https://x.xcute.workers.dev/f/images/9d4e99296fab.jpg" alt="One Pride Logo" class="w-full h-full object-cover">
                 </div>
                 <div>
                     <h1 class="font-heading font-black text-xl md:text-2xl leading-none text-white tracking-tight">ONE PRIDE</h1>
@@ -227,7 +230,7 @@
                 </h3>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 font-bold text-sm relative z-10">
                     <div class="flex items-center gap-3 bg-oprp-surface px-4 py-3 rounded-xl border border-white/5 shadow-inner">
-                        <i class="ph-fill ph-currency-dollar text-2xl text-oprp-gold"></i> <span>Uang $1.500</span>
+                        <i class="ph-fill ph-currency-dollar text-2xl text-oprp-gold"></i> <span>Uang $15.000</span>
                     </div>
                     <div class="flex items-center gap-3 bg-oprp-surface px-4 py-3 rounded-xl border border-white/5 shadow-inner">
                         <i class="ph-fill ph-trend-up text-2xl text-oprp-green"></i> <span>Langsung Level 2</span>
@@ -330,32 +333,33 @@
 
     </section>
 
-    <div id="checkoutModal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 modal-enter">
+    <!-- Modal Checkout Dynamic -->
+    <div id="checkoutModal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/70 modal-enter">
         
-        <div id="modalContent" class="bg-oprp-card w-full max-w-md border-2 border-white/10 rounded-[24px] shadow-3d-dark p-6 relative modal-content-enter max-h-[90vh] overflow-y-auto">
+        <div id="modalContent" class="bg-oprp-card w-full max-w-md border-2 border-white/10 rounded-[24px] shadow-3d-dark p-6 relative modal-content-enter max-h-[90vh] overflow-y-auto flex flex-col">
             
-            <button onclick="closeModal()" class="absolute top-5 right-5 w-8 h-8 bg-black border border-white/20 rounded-full flex items-center justify-center text-gray-400 hover:text-white hover:bg-oprp-orange transition-colors shadow-inner">
+            <button onclick="closeModal()" class="absolute top-5 right-5 w-8 h-8 bg-black border border-white/20 rounded-full flex items-center justify-center text-gray-400 hover:text-white hover:bg-oprp-orange transition-colors shadow-inner z-20">
                 <i class="ph-bold ph-x"></i>
             </button>
 
-            <div class="mb-5 pr-8">
+            <div class="mb-5 pr-8 flex-shrink-0">
                 <span class="font-mono text-oprp-orange font-bold text-[10px] uppercase tracking-wider bg-oprp-orange/10 px-2 py-1 rounded border border-oprp-orange/30">Checkout Invoice</span>
                 <h3 class="font-heading font-black text-2xl mt-2 text-white leading-none tracking-wide" id="modalItemName">Item Name</h3>
             </div>
 
             <!-- Preview Image (If Vehicle) -->
-            <div id="modalImgBox" class="hidden w-full h-36 bg-black/40 border border-white/10 rounded-xl mb-5 items-center justify-center p-3 overflow-hidden shadow-inner relative">
+            <div id="modalImgBox" class="hidden w-full h-36 bg-black/40 border border-white/10 rounded-xl mb-5 items-center justify-center p-3 overflow-hidden shadow-inner relative flex-shrink-0">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-0"></div>
                 <img id="modalImg" src="" alt="Preview" class="max-w-full max-h-full object-contain filter drop-shadow-[0_10px_10px_rgba(0,0,0,0.8)] relative z-10">
             </div>
 
             <!-- Price Box -->
-            <div class="bg-black/40 border border-white/10 rounded-xl p-4 mb-5 flex justify-between items-center shadow-inner">
+            <div class="bg-black/40 border border-white/10 rounded-xl p-4 mb-5 flex justify-between items-center shadow-inner flex-shrink-0">
                 <span class="font-bold text-xs text-gray-400 uppercase">Total Harga</span>
                 <span class="font-mono font-black text-xl text-[#FFD600]" id="modalItemPrice">Rp 0</span>
             </div>
 
-            <form id="orderForm" onsubmit="processOrder(event)" class="space-y-4">
+            <form id="orderForm" onsubmit="processOrder(event)" class="space-y-4 flex flex-col flex-1">
                 <input type="hidden" id="modalInvoiceId">
 
                 <div>
@@ -368,12 +372,14 @@
                     <input type="text" id="playerUCP" required placeholder="Cth: Kevn777" class="w-full bg-black/50 border border-white/20 rounded-xl px-4 py-3 font-mono text-sm text-white focus:outline-none focus:border-oprp-orange focus:bg-black transition-colors shadow-inner">
                 </div>
 
-                <div>
-                    <label class="block font-bold text-xs mb-1.5 text-gray-400 uppercase">CATATAN (OPSIONAL)</label>
-                    <input type="text" id="playerNote" placeholder="Lokasi Pom/House/Warna Mobil" class="w-full bg-black/50 border border-white/20 rounded-xl px-4 py-3 font-mono text-sm text-white focus:outline-none focus:border-oprp-orange focus:bg-black transition-colors shadow-inner">
+                <div class="mb-2">
+                    <!-- Label dinamis via JS -->
+                    <label id="dynamicNoteLabel" class="block font-bold text-xs mb-1.5 text-gray-400 uppercase">CATATAN (OPSIONAL)</label>
+                    <input type="text" id="playerNote" placeholder="Ketik catatan disini..." class="w-full bg-black/50 border border-white/20 rounded-xl px-4 py-3 font-mono text-sm text-white focus:outline-none focus:border-oprp-orange focus:bg-black transition-colors shadow-inner">
                 </div>
 
-                <div class="pt-3">
+                <!-- Padding tambahan agar tombol lega di HP -->
+                <div class="pt-4 pb-2 mt-auto">
                     <button type="submit" class="w-full bg-[#25D366] text-black border-2 border-black rounded-xl px-6 py-4 font-black text-sm shadow-[4px_4px_0_#000] hover:-translate-y-1 hover:shadow-[6px_6px_0_#000] transition-all active:translate-y-0 active:shadow-none flex items-center justify-center gap-2 uppercase tracking-wide">
                         <i class="ph-fill ph-whatsapp-logo text-xl"></i> PROSES KE WHATSAPP
                     </button>
@@ -395,8 +401,11 @@
     <footer class="border-t border-white/10 bg-black pt-12 pb-8 px-4 mt-auto">
         <div class="max-w-7xl mx-auto flex flex-col items-center gap-4 text-center">
             <h3 class="font-heading font-black text-2xl text-white tracking-tight uppercase text-3d">ONE PRIDE RP</h3>
-            <p class="font-mono text-gray-500 text-[10px] uppercase tracking-widest max-w-md">
+            <p class="font-mono text-gray-500 text-[10px] uppercase tracking-widest max-w-md leading-relaxed">
                 &copy; 2026 One Pride Roleplay. Real Life, Real Rules. Not affiliated with Rockstar Games.
+            </p>
+            <p class="font-mono text-oprp-orange/80 text-[9px] font-bold tracking-widest mt-1">
+                &copy;&reg; dev aku (kepin67) &amp; (Shakaa) &amp; (KennyYow) &amp; (GymantHytam)
             </p>
         </div>
     </footer>
@@ -544,6 +553,27 @@
                 imgBox.classList.remove('flex');
             }
 
+            // ==========================================
+            // LOGIC DYNAMIC SMART FORM (Perbaikan dari Gambar)
+            // ==========================================
+            const noteLabel = document.getElementById('dynamicNoteLabel');
+            const playerNote = document.getElementById('playerNote');
+
+            if (selectedItem.category === 'vehicle') {
+                noteLabel.innerText = 'WARNA MOBIL (OPSIONAL)';
+                playerNote.placeholder = 'Cth: Warna Hitam / Merah';
+            } else if (selectedItem.category === 'property') {
+                noteLabel.innerText = 'LOKASI PROPERTI (OPSIONAL)';
+                playerNote.placeholder = 'Cth: Dekat Bank LS / Idlewood';
+            } else if (selectedItem.name.toLowerCase().includes('skin')) {
+                noteLabel.innerText = 'ID SKIN (OPSIONAL)';
+                playerNote.placeholder = 'Cth: ID 230 / Skin Mafia';
+            } else {
+                noteLabel.innerText = 'CATATAN TAMBAHAN (OPSIONAL)';
+                playerNote.placeholder = 'Cth: Pesan untuk Admin (Jika ada)';
+            }
+            // ==========================================
+
             modal.classList.add('modal-enter-active');
             content.classList.add('modal-content-enter-active');
             document.body.style.overflow = 'hidden';
@@ -567,6 +597,12 @@
             const note = document.getElementById('playerNote').value || "-";
             const inv = document.getElementById('modalInvoiceId').value;
 
+            // Identifikasi tipe pesanan berdasarkan kategori untuk label di WA
+            let extraLabel = "Catatan";
+            if (selectedItem.category === 'vehicle') extraLabel = "Req Warna";
+            if (selectedItem.category === 'property') extraLabel = "Req Lokasi";
+            if (selectedItem.name.toLowerCase().includes('skin')) extraLabel = "Req ID Skin";
+
             const msg = 
 `Halo Admin OPRP,
 Saya ingin melakukan donasi dengan rincian berikut:
@@ -578,7 +614,7 @@ Saya ingin melakukan donasi dengan rincian berikut:
 • Total Harga : ${selectedItem.price}
 • Nickname IC : ${ic}
 • Akun UCP    : ${ucp}
-• Catatan     : ${note}
+• ${extraLabel.padEnd(11, ' ')} : ${note}
 ================================
 
 Tolong panduan nomor rekening / QRIS untuk pembayaran. Terima kasih.`;
@@ -623,3 +659,4 @@ Tolong panduan nomor rekening / QRIS untuk pembayaran. Terima kasih.`;
     </script>
 </body>
 </html>
+
