@@ -405,7 +405,7 @@
                 &copy; 2026 One Pride Roleplay. Real Life, Real Rules. Not affiliated with Rockstar Games.
             </p>
             <p class="font-mono text-oprp-orange/80 text-[9px] font-bold tracking-widest mt-1">
-                &copy;&reg;  (kepin67) &amp; (Shakaa) &amp; (KennyYow) &amp; (GymantHytam)
+                &copy;&reg; (kepin67) &amp; (Shakaa) &amp; (KennyYow) &amp; (GymantHytam)
             </p>
         </div>
     </footer>
@@ -449,6 +449,7 @@
             { id: "p7", name: "Workshop Custom", category: "property", price: "Rp 80.000", desc: "Mappingan custom kamu sendiri." },
             { id: "p8", name: "Dealership", category: "property", price: "Rp 40.000", desc: "Showroom kendaraan all type." },
             { id: "p9", name: "Private Farm", category: "property", price: "Rp 30.000", desc: "Ladang pribadi + Free 250 Seed." },
+            { id: "p10", name: "Storage Private", category: "property", price: "Rp 40.000", desc: "Bisa masukin 4 anggota. Simpan senjata, dll." },
 
             // GOLD
             { id: "g1", name: "1.000 Gold", category: "gold", price: "Rp 15.000", desc: "Currency in-game." },
@@ -464,7 +465,10 @@
             { id: "i5", name: "Tong Sampah", category: "item", price: "Rp 10.000", desc: "Objek tong sampah pribadi." },
             { id: "i6", name: "Garkot", category: "item", price: "Rp 15.000", desc: "Fasilitas garasi kota umum." },
             { id: "i7", name: "Garkot Private", category: "item", price: "Rp 15.000", desc: "Garasi kota khusus milikmu." },
-            { id: "i8", name: "Vending Machine", category: "item", price: "Rp 20.000", desc: "Mesin minuman pasif income." }
+            { id: "i8", name: "Vending Machine", category: "item", price: "Rp 20.000", desc: "Mesin minuman pasif income." },
+            { id: "i9", name: "Custom No HP", category: "item", price: "Rp 10.000", desc: "Ubah nomor HP IC jadi angka cantik pilihanmu." },
+            { id: "i10", name: "Custom No Rekening", category: "item", price: "Rp 10.000", desc: "Ubah no rekening IC jadi angka cantik pilihanmu." },
+            { id: "i11", name: "Custom Plate", category: "item", price: "Rp 15.000", desc: "Ubah plat nomor kendaraan custom pilihanmu." }
         ];
 
         let selectedItem = null;
@@ -554,10 +558,11 @@
             }
 
             // ==========================================
-            // LOGIC DYNAMIC SMART FORM (Perbaikan dari Gambar)
+            // LOGIC DYNAMIC SMART FORM 
             // ==========================================
             const noteLabel = document.getElementById('dynamicNoteLabel');
             const playerNote = document.getElementById('playerNote');
+            const itemNameLower = selectedItem.name.toLowerCase();
 
             if (selectedItem.category === 'vehicle') {
                 noteLabel.innerText = 'WARNA MOBIL (OPSIONAL)';
@@ -565,12 +570,21 @@
             } else if (selectedItem.category === 'property') {
                 noteLabel.innerText = 'LOKASI PROPERTI (OPSIONAL)';
                 playerNote.placeholder = 'Cth: Dekat Bank LS / Idlewood';
-            } else if (selectedItem.name.toLowerCase().includes('skin')) {
+            } else if (itemNameLower.includes('skin')) {
                 noteLabel.innerText = 'ID SKIN (OPSIONAL)';
                 playerNote.placeholder = 'Cth: ID 230 / Skin Mafia';
+            } else if (itemNameLower.includes('no hp')) {
+                noteLabel.innerText = 'REQUEST NOMOR HP (WAJIB)';
+                playerNote.placeholder = 'Cth: 5555 / 888888';
+            } else if (itemNameLower.includes('rekening')) {
+                noteLabel.innerText = 'REQUEST NO REKENING (WAJIB)';
+                playerNote.placeholder = 'Cth: 999999 / 123456';
+            } else if (itemNameLower.includes('plate')) {
+                noteLabel.innerText = 'TEKS PLAT NOMOR (WAJIB)';
+                playerNote.placeholder = 'Cth: KEVIN / OPRP BOSS';
             } else {
-                noteLabel.innerText = 'CATATAN TAMBAHAN (OPSIONAL)';
-                playerNote.placeholder = 'Cth: Pesan untuk Admin (Jika ada)';
+                noteLabel.innerText = 'CATATAN (OPSIONAL)';
+                playerNote.placeholder = 'Ketik catatan disini...';
             }
             // ==========================================
 
@@ -597,11 +611,8 @@
             const note = document.getElementById('playerNote').value || "-";
             const inv = document.getElementById('modalInvoiceId').value;
 
-            // Identifikasi tipe pesanan berdasarkan kategori untuk label di WA
-            let extraLabel = "Catatan";
-            if (selectedItem.category === 'vehicle') extraLabel = "Req Warna";
-            if (selectedItem.category === 'property') extraLabel = "Req Lokasi";
-            if (selectedItem.name.toLowerCase().includes('skin')) extraLabel = "Req ID Skin";
+            // Dapatkan label untuk text di WA biar akurat
+            let extraLabel = document.getElementById('dynamicNoteLabel').innerText.replace(' (OPSIONAL)', '').replace(' (WAJIB)', '');
 
             const msg = 
 `Halo Admin OPRP,
